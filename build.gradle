@@ -12,6 +12,19 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = 'org.sasanlabs.vulnerableapp'
+            artifactId = 'facade-schema'
+            version = '1.0.0'
+
+            from components.java
+        }
+    }
+}
 
 repositories {
     mavenCentral()
