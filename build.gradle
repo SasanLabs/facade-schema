@@ -13,16 +13,72 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 publishing {
     publications {
-        maven(MavenPublication) {
-            groupId = 'org.sasanlabs.vulnerableapp'
+        mavenJava(MavenPublication) {
             artifactId = 'facade-schema'
+            groupId = 'io.github.sasanlabs'
             version = '1.0.0'
-
             from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'facade-schema'
+                url = 'https://github.com/SasanLabs/facade-schema'
+                
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'preetkaran20@gmail.com'
+                        name = 'Karan Preet Singh Sasan'
+                        email = 'preetkaran20@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/SasanLabs/facade-schema.git'
+                    developerConnection = 'scm:git:git://github.com/SasanLabs/facade-schema.git'
+                    url = 'https://github.com/SasanLabs/facade-schema'
+                }
+            }
         }
+    }
+	repositories {
+        maven {
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            credentials {
+                username "${ossrhUsername}"
+                password "${ossrhPassword}"
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
     }
 }
 

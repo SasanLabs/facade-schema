@@ -4,27 +4,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /** @author preetkaran20@gmail.com KSASAN */
-public class FacadeResourceInformation {
+public class ResourceInformation {
 
     @JsonProperty("htmlResource")
-    private FacadeResourceURI htmlResource;
+    private ResourceURI htmlResource;
 
     @JsonProperty("staticResources")
-    private List<FacadeResourceURI> staticResources;
+    private List<ResourceURI> staticResources;
 
-    public FacadeResourceURI getHtmlResource() {
+    public ResourceURI getHtmlResource() {
         return htmlResource;
     }
 
-    public void setHtmlResource(FacadeResourceURI htmlResource) {
+    public void setHtmlResource(ResourceURI htmlResource) {
         this.htmlResource = htmlResource;
     }
 
-    public List<FacadeResourceURI> getStaticResources() {
+    public List<ResourceURI> getStaticResources() {
         return staticResources;
     }
 
-    public void setStaticResources(List<FacadeResourceURI> staticResources) {
+    public void setStaticResources(List<ResourceURI> staticResources) {
         this.staticResources = staticResources;
     }
 }

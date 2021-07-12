@@ -3,10 +3,10 @@ package org.sasanlabs.vulnerableapp.facade.schema;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** @author preetkaran20@gmail.com KSASAN */
-public class FacadeResourceURI {
+public class ResourceURI {
 
     @JsonProperty("resourceType")
-    private String resourceType = FacadeResourceType.HTML.name();
+    private String resourceType = ResourceType.HTML.name();
 
     @JsonProperty("isAbsolute")
     private boolean isAbsolute;
@@ -14,13 +14,13 @@ public class FacadeResourceURI {
     @JsonProperty("uri")
     private String uri;
 
-    public FacadeResourceURI(boolean isAbsolute, String uri) {
+    public ResourceURI(boolean isAbsolute, String uri) {
         super();
         this.isAbsolute = isAbsolute;
         this.uri = uri;
     }
 
-    public FacadeResourceURI(boolean isAbsolute, String uri, String resourceType) {
+    public ResourceURI(boolean isAbsolute, String uri, String resourceType) {
         super();
         this.isAbsolute = isAbsolute;
         this.uri = uri;
