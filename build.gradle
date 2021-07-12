@@ -96,9 +96,6 @@ spotless {
         clearSteps()
         googleJavaFormat().aosp()
     }
-    format 'javascript', {
-    	target 'src/main/resources/**/*.js'
-  	}
 }
 
 dependencies {
