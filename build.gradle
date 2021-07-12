@@ -25,7 +25,8 @@ publishing {
         mavenJava(MavenPublication) {
             artifactId = 'facade-schema'
             groupId = 'io.github.sasanlabs'
-            version = '1.0.1'
+            version = '1.0.2'
+            
             from components.java
             versionMapping {
                 usage('java-api') {
@@ -38,6 +39,7 @@ publishing {
             pom {
                 name = 'facade-schema'
                 url = 'https://github.com/SasanLabs/facade-schema'
+                description = 'Schema to fulfill the VulnerableApp-facade contract'
                 
                 licenses {
                     license {
