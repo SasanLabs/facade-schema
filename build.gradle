@@ -19,13 +19,13 @@ java {
     withJavadocJar()
     withSourcesJar()
 }
-version = '1.0.2'
+version = '1.0.3'
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId = 'facade-schema'
             groupId = 'io.github.sasanlabs'
-            version = '1.0.2'
+            version = '1.0.3'
             
             from components.java
             versionMapping {
