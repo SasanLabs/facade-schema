@@ -2,7 +2,9 @@ package org.sasanlabs.vulnerableapp.facade.schema;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** @author preetkaran20@gmail.com KSASAN */
+/**
+ * @author preetkaran20@gmail.com KSASAN
+ */
 public class ResourceURI {
 
     @JsonProperty("resourceType")

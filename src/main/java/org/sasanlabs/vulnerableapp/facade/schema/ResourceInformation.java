@@ -3,7 +3,9 @@ package org.sasanlabs.vulnerableapp.facade.schema;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
-/** @author preetkaran20@gmail.com KSASAN */
+/**
+ * @author preetkaran20@gmail.com KSASAN
+ */
 public class ResourceInformation {
 
     @JsonProperty("htmlResource")
