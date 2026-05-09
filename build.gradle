@@ -1,87 +1,53 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-}
-
-//Community Plugins
 plugins {
     id("com.diffplug.spotless") version "5.6.1"
+    id("com.vanniktech.maven.publish") version "0.34.0"
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'signing'
 }
-
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
-
-java {
-    withJavadocJar()
-    withSourcesJar()
-}
+group = 'io.github.sasanlabs'
 version = '1.0.3'
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'facade-schema'
-            groupId = 'io.github.sasanlabs'
-            version = '1.0.3'
-            
-            from components.java
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
-            }
-            pom {
-                name = 'facade-schema'
-                url = 'https://github.com/SasanLabs/facade-schema'
-                description = 'Schema to fulfill the VulnerableApp-facade contract'
-                
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'preetkaran20@gmail.com'
-                        name = 'Karan Preet Singh Sasan'
-                        email = 'preetkaran20@gmail.com'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git://github.com/SasanLabs/facade-schema.git'
-                    developerConnection = 'scm:git:git://github.com/SasanLabs/facade-schema.git'
-                    url = 'https://github.com/SasanLabs/facade-schema'
-                }
+
+mavenPublishing {
+    publishToMavenCentral()
+
+    coordinates(
+            "io.github.sasanlabs",
+            "facade-schema",
+            "1.0.3"
+    )
+    pom {
+        name = "facade-schema"
+        description = "Schema to fulfill the VulnerableApp-facade contract"
+        url = "https://github.com/SasanLabs/facade-schema"
+
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
             }
         }
-    }
-	repositories {
-        maven {
-            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-            credentials {
-                username "${ossrhUsername}"
-                password "${ossrhPassword}"
+
+        developers {
+            developer {
+                id = "sasanlabs"
+                name = "Karan Preet Singh Sasan"
+                email = "preetkaran20@gmail.com"
             }
+        }
+
+        scm {
+            connection = "scm:git:git://github.com/SasanLabs/facade-schema.git"
+            developerConnection = "scm:git:ssh://github.com/SasanLabs/facade-schema.git"
+            url = "https://github.com/SasanLabs/facade-schema"
         }
     }
 }
 
 signing {
-    sign publishing.publications.mavenJava
-}
-
-
-javadoc {
-    if(JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
-    }
+    useGpgCmd()
+    sign publishing.publications
 }
 
 repositories {
@@ -89,20 +55,24 @@ repositories {
     gradlePluginPortal()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 spotless {
     java {
-        // Don't enforce the license, just the format.
         clearSteps()
         googleJavaFormat().aosp()
     }
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
-	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.4'
 }
 
 test {
